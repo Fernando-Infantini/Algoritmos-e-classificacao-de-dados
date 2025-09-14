@@ -1,0 +1,4 @@
+Aluno: Fernando infantini Satte Alam Nogueira
+matricula: 2410101649
+Algoritmos e Classificacao de Dados
+Este código implementa o exercicio mercado da disciplina, cuja descrição está no pdf na pasta.

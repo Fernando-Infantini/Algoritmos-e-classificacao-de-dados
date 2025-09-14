@@ -1,0 +1,5 @@
+Aluno: Fernando Infantini Satte Alam Nogueira
+Matricula: 2410101649
+Algoritmos e classificacao de dados
+O codigo serve para descobrir a resistencia de resistores tanto em serie como em paralelo, podendo intercalar ambos.
+Ele foi feito seguindo descrição e uml disponibilizados no moodle da disciplina e pdf que esta presente na pasta.

@@ -1,0 +1,3 @@
+public enum Descricao{
+    VAZIO,ARROZ, FEIJAO, FARINHA, LEITE, CHOCOLATE, CARNE;
+}
