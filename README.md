@@ -107,8 +107,6 @@ O projeto foi desenvolvido com foco em estruturas de dados e programação orien
 
 O arquivo de músicas deve seguir o seguinte formato:
 
-```txt
-N
 artista;codigo;titulo;letra
 
 ---
