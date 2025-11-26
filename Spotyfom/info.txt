@@ -1,0 +1,9 @@
+Esse programa simula um sistema de streaming de musica.
+Ele le musicas de um arquivo, permite criar playlists, buscar musicas e executar playlists.
+O sistema salva backups e gera relatorio automatico.
+As buscas nao diferenciam letras maiusculas de minusculas.
+O contador de execucoes aumenta a cada musica tocada.
+
+Para rodar:
+javac *.java
+java Main
