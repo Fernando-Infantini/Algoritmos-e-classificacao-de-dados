@@ -1,0 +1,4 @@
+Estes códigos geram uma interface gráfica para gerir um sistema de aluguéis de barcos, cadeiras, barracas e etc.
+Para rodar execute os comandos:
+javac *.java
+java SammyAPP
