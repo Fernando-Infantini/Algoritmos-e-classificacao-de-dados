@@ -1,1 +1,0 @@
-for i in $(seq 10); do ./benchmark.sh Bubble && ./put_together.sh Bubble; done; for i in $(seq 10); do ./benchmark6.sh Bubble; done;

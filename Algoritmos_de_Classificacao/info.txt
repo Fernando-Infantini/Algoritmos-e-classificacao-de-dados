@@ -1,5 +1,0 @@
-Estes códigos são algoritmos de ordenação estudados durante as disciplinas
-Eles ordenam vetores que implementem a interface compateTo do java e para rodar eles basta seguir o how.txt
-Ele mostra como rodar os códigos para comparar os algoritmos lado a lado
-Caso deseje testar voce mesmo use "javac algoritmo.java" e "java algoritmo"
-use -D -A ou -R para um vetor decrescente, crescente ou aleatório, informando em seguida o tamanho desejado e seed no caso do aleatório 
