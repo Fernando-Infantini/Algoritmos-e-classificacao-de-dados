@@ -55,6 +55,17 @@ Sistema de gerenciamento de aluguéis de equipamentos com foco em organização 
   - Diferenciação entre tipos de equipamentos
 
 ---
+## 🔹 Algorítmos de Ordenação
+
+### 📌 Descrição:
+Implementação dos algorítmos de ordenação vistos durante a disciplina
+
+### 📘 Conteúdo:
+- Bubblesort, insertionsort, countingsort, quicksort, selectionsort, bucketsort, heapsort, mergesort, radixsort, shellsort em java.
+- Codigos para benchmark em shell
+
+
+---
 
 ## 🔹 BTree
 
