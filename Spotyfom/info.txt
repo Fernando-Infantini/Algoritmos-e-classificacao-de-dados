@@ -1,9 +1,7 @@
-Esse programa simula um sistema de streaming de musica.
-Ele le musicas de um arquivo, permite criar playlists, buscar musicas e executar playlists.
-O sistema salva backups e gera relatorio automatico.
-As buscas nao diferenciam letras maiusculas de minusculas.
-O contador de execucoes aumenta a cada musica tocada.
+O programa busca implementar um sistema para gerenciamento de músicas utilizando árvores B
+Para utilizar deve-se informar o arquivo com as músicas no formato indicado pelo README
+É possível buscar as músicas por nome da música, artista e código, além de visualizar as árvores geradas
 
 Para rodar:
 javac *.java
-java Main
+java Spotyfom

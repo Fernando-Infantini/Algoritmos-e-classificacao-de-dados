@@ -1,329 +1,204 @@
 import java.io.*;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class Spotyfom {
+    // Definindo as 3 árvores (Índices)
+    private static ArvoreB<String, Musica> arvoreNome = new ArvoreB<>(3);
+    private static ArvoreB<String, Musica> arvoreBanda = new ArvoreB<>(3);
+    private static ArvoreB<Integer, Musica> arvoreCodigo = new ArvoreB<>(3);
 
-    public static Scanner sc = new Scanner(System.in);
+    private static String nomeArquivo = "musicas.txt"; // Valor padrão
+    private static int ultimaLinhaLida = 0; // Controla o número da linha
 
-    public static List<Musica> acervo = new LinkedList<>();
-    public static Queue<Musica> playlistAleatoria = new ArrayDeque<>();
-    public static Stack<Musica> playlistUsuario = new Stack<>();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("=== CONFIGURACAO INICIAL ===");
+        System.out.print("Digite o nome do arquivo de musicas (ex: musicas.txt): ");
+        String inputNome = sc.nextLine();
+        if (!inputNome.trim().isEmpty()) {
+            nomeArquivo = inputNome;
+        }
 
-    // ================= UTIL =================
-
-    public static void imprime(Musica m) {
-        System.out.println("----------------------------");
-        System.out.println("Titulo: " + m.titulo);
-        System.out.println("Artista: " + m.artista);
-        System.out.println("Codigo: " + m.codigo);
-        System.out.println("Execucoes: " + m.execucoes);
-        System.out.println("Letra: " + m.letra);
+        carregarDados();
+        menu(sc);
     }
 
-    public static void imprimirAcervo() {
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
+    private static void carregarDados() {
+        System.out.println("Carregando arquivo " + nomeArquivo + "...");
+        File arquivo = new File(nomeArquivo);
+        
+        // Zera contador caso recarregue
+        ultimaLinhaLida = 0;
+
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo nao encontrado. Sera criado ao adicionar musicas.");
             return;
         }
 
-        for (Musica m : acervo)
-            imprime(m);
-    }
-
-    public static void pausar() {
-        System.out.println("\nPressione ENTER para continuar...");
-        sc.nextLine();
-    }
-
-    public static int lerOpcaoSegura() {
-        try {
-            return Integer.parseInt(sc.nextLine());
-        } catch (Exception e) {
-            return -1;
-        }
-    }
-
-    // ================= ARQUIVO =================
-
-    public static void lerArquivo(String nome) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nome))) {
-
-            int n = Integer.parseInt(br.readLine());
-            acervo.clear();
-
-            for (int i = 0; i < n; i++) {
-                String[] p = br.readLine().split(";");
-
-                Musica m = new Musica();
-                m.artista = p[0];
-                m.codigo = Integer.parseInt(p[1]);
-                m.titulo = p[2];
-                m.letra = p[3];
-                m.execucoes = 0;
-
-                acervo.add(m);
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha = br.readLine(); // Lê cabeçalho (quantidade)
+            ultimaLinhaLida = 1; // Linha 1 é o cabeçalho
+            
+            while ((linha = br.readLine()) != null) {
+                ultimaLinhaLida++; // Incrementa contador de linha atual
+                
+                if (linha.trim().isEmpty()) continue; // Ignora linhas espaços, tabs e outros não visiveis.
+                
+                try {
+                    String[] partes = linha.split(";");
+                    if (partes.length >= 3) { // Garante o mínimo de dados
+                        String banda = partes[0].trim();
+                        int codigo = Integer.parseInt(partes[1].trim());
+                        String nome = partes[2].trim();
+                        // Trata caso a letra ou lixo não existam
+                        String letra = (partes.length > 3) ? partes[3].trim() : "";
+                        
+                        Musica m = new Musica(banda, codigo, nome, letra, ultimaLinhaLida);
+                        indexarMusica(m);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Erro de formato na linha " + ultimaLinhaLida + ": " + e.getMessage());
+                }
             }
-
-            System.out.println("\nArquivo carregado com sucesso!");
-
-        } catch (Exception e) {
-            System.out.println("Erro ao abrir arquivo: " + e.getMessage());
+            System.out.println("Carga concluida! Total de linhas processadas: " + ultimaLinhaLida);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void backup(String nome) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(nome))) {
-
-            pw.println(acervo.size());
-
-            for (Musica m : acervo)
-                pw.println(m.artista + ";" + m.codigo + ";" + m.titulo + ";" + m.letra + ";" + m.execucoes);
-
-            System.out.println("\nBackup salvo com sucesso!");
-
-        } catch (Exception e) {
-            System.out.println("Erro ao salvar backup: " + e.getMessage());
-        }
+    private static void indexarMusica(Musica m) {
+        arvoreNome.inserir(m.getNome().toUpperCase(), m);
+        arvoreBanda.inserir(m.getBanda().toUpperCase(), m);
+        arvoreCodigo.inserir(m.getCodigo(), m);
     }
 
-    public static void lerBackup(String nome) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nome))) {
-
-            int n = Integer.parseInt(br.readLine());
-            acervo.clear();
-
-            for (int i = 0; i < n; i++) {
-                String[] p = br.readLine().split(";");
-
-                Musica m = new Musica();
-                m.artista = p[0];
-                m.codigo = Integer.parseInt(p[1]);
-                m.titulo = p[2];
-                m.letra = p[3];
-                m.execucoes = Integer.parseInt(p[4]);
-
-                acervo.add(m);
+    private static void adicionarMusicaNoArquivo(Musica m) {
+        /*
+         * Logica para evitar linha em branco extra:
+         * 1. Verifica se o arquivo tem conteúdo.
+         * 2. Se tiver, verifica se o ultimo caractere é newline (isso é complexo em Java simples).
+         * 3. Solução Prática: Escrever sempre com newline ANTES, mas garantir que leitura ignore vazios.
+         * Se o arquivo original terminar com \n, vai ficar um gap. 
+         * Para o trabalho, usar o append simples é mais seguro.
+         */
+        try (FileWriter fw = new FileWriter(nomeArquivo, true);
+             BufferedWriter bw = new BufferedWriter(fw)) {
+            
+            // Verifica se o arquivo existe e tem tamanho > 0 para decidir se põe quebra de linha inicial
+            File f = new File(nomeArquivo);
+            if (f.exists() && f.length() > 0) {
+                bw.newLine();
             }
-
-            System.out.println("\nBackup carregado com sucesso!");
-
-        } catch (Exception e) {
-            System.out.println("Backup invalido: " + e.getMessage());
+            
+            bw.write(m.toFileString());
+            // Não damos newLine no final para evitar criar gap na próxima inserção
+            
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar no disco: " + e.getMessage());
         }
     }
 
-    // ================= BUSCAS =================
-
-    public static void buscaTitulo() {
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
-            return;
-        }
-
-        System.out.print("Digite o titulo: ");
-        String titulo = sc.nextLine().trim();
-
-        boolean achou = false;
-        for (Musica m : acervo)
-            if (m.titulo.equalsIgnoreCase(titulo)) {
-                imprime(m);
-                achou = true;
-            }
-
-        if (!achou)
-            System.out.println("Nenhuma musica encontrada.");
-    }
-
-    public static void buscaArtista() {
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
-            return;
-        }
-
-        System.out.print("Digite o artista: ");
-        String artista = sc.nextLine().trim();
-
-        boolean achou = false;
-        for (Musica m : acervo)
-            if (m.artista.equalsIgnoreCase(artista)) {
-                imprime(m);
-                achou = true;
-            }
-
-        if (!achou)
-            System.out.println("Nenhuma musica encontrada.");
-    }
-
-    public static void buscaCodigo() {
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
-            return;
-        }
-
-        System.out.print("Digite o codigo: ");
-        int codigo = lerOpcaoSegura();
-
-        boolean achou = false;
-        for (Musica m : acervo)
-            if (m.codigo == codigo) {
-                imprime(m);
-                achou = true;
-            }
-
-        if (!achou)
-            System.out.println("Nenhuma musica encontrada.");
-    }
-
-    // ================= PLAYLIST =================
-
-    public static void criaPlaylistAleatoria() {
-
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
-            return;
-        }
-
-        playlistAleatoria.clear();
-        System.out.print("Quantidade de musicas: ");
-        int q = lerOpcaoSegura();
-
-        if (q <= 0) {
-            System.out.println("Quantidade invalida.");
-            return;
-        }
-
-        if (q > acervo.size()) {
-            System.out.println("Quantidade maior que acervo. Ajustado.");
-            q = acervo.size();
-        }
-
-        Random r = new Random();
-
-        for (int i = 0; i < q; i++)
-            playlistAleatoria.add(acervo.get(r.nextInt(acervo.size())));
-
-        System.out.println("\nPlaylist aleatoria criada:");
-        for (Musica m : playlistAleatoria)
-            imprime(m);
-    }
-
-    public static void criaPlaylistUsuario() {
-
-        if (acervo.isEmpty()) {
-            System.out.println("Acervo vazio.");
-            return;
-        }
-
-        playlistUsuario.clear();
-        int op;
-
-        do {
-            System.out.println("\n1. Buscar por titulo");
-            System.out.println("2. Buscar por codigo");
-            System.out.println("0. Finalizar");
+    private static void menu(Scanner sc) {
+        while (true) {
+            System.out.println("\n=== SPOTYFOM 2.0 (" + nomeArquivo + ") ===");
+            System.out.println("1. Buscar por Nome da Musica");
+            System.out.println("2. Buscar por Banda");
+            System.out.println("3. Buscar por Codigo");
+            System.out.println("4. Adicionar Nova Musica");
+            System.out.println("5. Visualizar Estrutura das Arvores (Debug)");
+            System.out.println("0. Sair");
             System.out.print("Opcao: ");
+            
+            String op = sc.nextLine();
 
-            op = lerOpcaoSegura();
-
-            if (op == 1) {
-                System.out.print("Titulo: ");
-                String t = sc.nextLine();
-
-                boolean achou = false;
-                for (Musica m : acervo)
-                    if (m.titulo.equalsIgnoreCase(t)) {
-                        playlistUsuario.push(m);
-                        achou = true;
+            switch (op) {
+                case "1":
+                    System.out.print("Digite o nome da musica: ");
+                    exibirResultado(arvoreNome.buscar(sc.nextLine().toUpperCase()));
+                    break;
+                case "2":
+                    System.out.print("Digite a banda: ");
+                    exibirResultado(arvoreBanda.buscar(sc.nextLine().toUpperCase()));
+                    break;
+                case "3":
+                    System.out.print("Digite o codigo: ");
+                    try {
+                        exibirResultado(arvoreCodigo.buscar(Integer.parseInt(sc.nextLine())));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Codigo invalido.");
                     }
-
-                if (!achou)
-                    System.out.println("Musica nao encontrada.");
+                    break;
+                case "4":
+                    cadastrarMusica(sc);
+                    break;
+                case "5":
+                    menuVisualizacao(sc);
+                    break;
+                case "0":
+                    System.out.println("Saindo...");
+                    return;
+                default:
+                    System.out.println("Opcao invalida.");
             }
+        }
+    }
+    
+    private static void menuVisualizacao(Scanner sc) {
+        System.out.println("\n--- Qual arvore voce quer ver? ---");
+        System.out.println("1. Arvore de Nomes");
+        System.out.println("2. Arvore de Bandas");
+        System.out.println("3. Arvore de Codigos");
+        String op = sc.nextLine();
+        
+        System.out.println("\n--- ESTRUTURA DA ARVORE B ---");
+        switch(op) {
+            case "1": arvoreNome.imprimirArvore(); break;
+            case "2": arvoreBanda.imprimirArvore(); break;
+            case "3": arvoreCodigo.imprimirArvore(); break;
+            default: System.out.println("Opcao invalida.");
+        }
+        System.out.println("-----------------------------");
+    }
 
-            if (op == 2) {
-                System.out.print("Codigo: ");
-                int c = lerOpcaoSegura();
-
-                boolean achou = false;
-                for (Musica m : acervo)
-                    if (m.codigo == c) {
-                        playlistUsuario.push(m);
-                        achou = true;
-                    }
-
-                if (!achou)
-                    System.out.println("Codigo invalido.");
+    private static void exibirResultado(List<Musica> resultado) {
+        if (resultado == null || resultado.isEmpty()) {
+            System.out.println(">>> Nenhuma musica encontrada.");
+        } else {
+            System.out.println(">>> Encontrado(s) " + resultado.size() + " registro(s):");
+            for (Musica m : resultado) {
+                System.out.println(m);
             }
-
-        } while (op != 0);
-
-        if (playlistUsuario.isEmpty()) {
-            System.out.println("\nPlaylist vazia.");
-            return;
-        }
-
-        System.out.println("\nPlaylist criada:");
-        for (Musica m : playlistUsuario)
-            imprime(m);
-    }
-
-    public static void executaAleatoria() {
-        if (playlistAleatoria.isEmpty()) {
-            System.out.println("Playlist vazia.");
-            return;
-        }
-
-        while (!playlistAleatoria.isEmpty()) {
-            Musica m = playlistAleatoria.poll();
-            m.execucoes++;
-            imprime(m);
         }
     }
 
-    public static void executaUsuario() {
-        if (playlistUsuario.isEmpty()) {
-            System.out.println("Playlist vazia.");
-            return;
+    private static void cadastrarMusica(Scanner sc) {
+        try {
+            System.out.print("Nome da Banda: ");
+            String banda = sc.nextLine();
+            
+            System.out.print("Codigo (Inteiro): ");
+            int codigo = Integer.parseInt(sc.nextLine());
+            
+            System.out.print("Nome da Musica: ");
+            String nome = sc.nextLine();
+            
+            System.out.print("Trecho da Letra: ");
+            String letra = sc.nextLine();
+
+            ultimaLinhaLida++; 
+            
+            Musica m = new Musica(banda, codigo, nome, letra, ultimaLinhaLida);
+            
+            adicionarMusicaNoArquivo(m); // Escreve no txt
+            indexarMusica(m); // Atualiza na RAM
+            
+            System.out.println("Musica cadastrada na linha " + ultimaLinhaLida + " com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar: " + e.getMessage());
+            // Se falhou, decrementa para manter consistência
+            ultimaLinhaLida--; 
         }
-
-        while (!playlistUsuario.isEmpty()) {
-            Musica m = playlistUsuario.pop();
-            m.execucoes++;
-            imprime(m);
-        }
-    }
-
-    // ================= RELATORIO =================
-
-    public static void relatorio() {
-
-        if (acervo.isEmpty()) {
-            System.out.println("Nao ha dados.");
-            return;
-        }
-
-        int total = 0;
-        Musica top = acervo.get(0);
-
-        for (Musica m : acervo) {
-            total += m.execucoes;
-            if (m.execucoes > top.execucoes)
-                top = m;
-        }
-
-        System.out.println("\n========== RELATORIO ==========");
-        System.out.println("Total de musicas: " + acervo.size());
-        System.out.println("Total de execucoes: " + total);
-        System.out.println("\nMais tocada:");
-        imprime(top);
-
-        acervo.sort((a, b) -> b.execucoes - a.execucoes);
-
-        System.out.println("\nRanking:");
-        int pos = 1;
-        for (Musica m : acervo)
-            System.out.println(pos++ + "º - " + m.titulo + " (" + m.execucoes + ")");
-
-        System.out.println("===============================");
     }
 }
