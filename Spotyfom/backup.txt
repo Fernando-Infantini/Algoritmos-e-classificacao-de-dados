@@ -1,0 +1,115 @@
+100
+Matanza;1001;ELA ROUBOU MEU CAMINHAO;Foi embora e nao ligou o radio;BR1
+Matanza;1002;PE NA PORTA SOCO NA CARA;Nao tem conversa fiada e nem licencinha;BR2
+Foo Fighters;2001;EVERLONG;Hello Ive waited here for you;INT01
+Foo Fighters;2002;THE PRETENDER;Keep you in the dark;INT02
+Megadeth;3001;SYMPHONY DESTRUCTION;You take a mortal man;USA1
+Megadeth;3002;HOLY WARS;Brother will kill brother;USA2
+Slayer;3003;RAINING BLOOD;Trapped in purgatory;USA3
+Metallica;3004;ENTER SANDMAN;Say your prayers little one;USA4
+Metallica;3005;MASTER OF PUPPETS;End of passion play crumbling away;USA5
+Metallica;3006;NOTHING ELSE MATTERS;So close no matter how far;USA6
+Metallica;3007;ONE;I cannot remember anything;USA7
+Metallica;3008;SAD BUT TRUE;Hey I am your life;USA8
+Raimundos;4001;MULHER DE FASES;Que mulher ruim jogou minhas coisas fora;BR3
+Raimundos;4002;EU QUERO VER O OCO;Minha nega na janela diz que esta;BR4
+Raimundos;4003;A MAIS PEDIDA;Ela e a mais pedida do verao;BR4B
+Chico Buarque;5001;CONSTRUCAO;Amou daquela vez como se fosse a ultima;MPB1
+Chico Buarque;5002;A BANDA;Estava a toa na vida o meu amor me chamou;MPB2
+Oingo Boingo;6001;DEAD MANS PARTY;All dressed up with nowhere to go;INT80
+Oingo Boingo;6002;STAY;This is not the first time;INT81
+Pink Floyd;7001;ANOTHER BRICK IN THE WALL;We dont need no education;UK1
+Pink Floyd;7002;COMFORTABLY NUMB;Hello is there anybody in there;UK2
+Pink Floyd;7003;WISH YOU WERE HERE;So so you think you can tell;UK3
+Pink Floyd;7004;TIME;Ticking away the moments that make up a dull day;UK3B
+Queen;8001;BOHEMIAN RHAPSODY;Is this the real life is this just fantasy;UK4
+Queen;8002;DONT STOP ME NOW;Tonight Im gonna have myself a real good time;UK5
+Queen;8003;WE WILL ROCK YOU;Buddy youre a boy make a big noise;UK6
+Queen;8004;RADIO GA GA;Id sit alone and watch your light;UK7
+Dio;9001;HOLY DIVER;Holy Diver Youve been down too long;MTL1
+Black Sabbath;9002;PARANOID;Finished with my woman cause she couldnt help me;MTL2
+Black Sabbath;9003;IRON MAN;Has he lost his mind;MTL3
+Black Sabbath;9004;WAR PIGS;Generals gathered in their masses;MTL4
+Red Hot Chili Peppers;1101;CALIFORNICATION;Psychic spies from China try to steal;USA9
+Red Hot Chili Peppers;1102;UNDER THE BRIDGE;Sometimes I feel like I dont have a partner;USA10
+Red Hot Chili Peppers;1103;OTHERSIDE;How long how long will I slide;USA11
+Ramones;1201;BLITZKRIEG BOP;Hey ho lets go;PNK1
+Ramones;1202;I WANNA BE SEDATED;Twenty twenty twenty four hours to go;PNK2
+Ramones;1203;PET SEMATARY;I dont want to be buried in a pet sematary;PNK2B
+Green Day;1301;BASKET CASE;Do you have the time to listen to me whine;PNK3
+Green Day;1302;AMERICAN IDIOT;Dont wanna be an American idiot;PNK4
+Green Day;1303;BOULEVARD OF BROKEN DREAMS;I walk a lonely road;PNK4B
+Blink 182;1401;ALL THE SMALL THINGS;All the small things true care truth brings;PNK5
+Blink 182;1402;I MISS YOU;Hello there the angel from my nightmare;PNK6
+Nirvana;1501;SMELLS LIKE TEEN SPIRIT;Load up on guns bring your friends;GRG1
+Nirvana;1502;COME AS YOU ARE;Come as you are as you were;GRG2
+Nirvana;1503;HEART SHAPED BOX;She eyes me like a pisces;GRG3
+Legiao Urbana;1601;TEMPO PERDIDO;Todos os dias quando acordo;BR5
+Legiao Urbana;1602;FAROESTE CABOCLO;Nao tinha medo o tal Joao de Santo Cristo;BR6
+Legiao Urbana;1603;PAIS E FILHOS;E preciso amar as pessoas como se nao houvesse amanha;BR7
+Legiao Urbana;1604;SERA;Tire suas maos de mim;BR7B
+Engenheiros do Hawaii;1701;INFINITA HIGHWAY;Voce me faz correr demais;BR8
+Engenheiros do Hawaii;1702;O PAPA E POP;O papa e pop o papa e pop;BR9
+Iron Maiden;1801;THE TROOPER;You take my life but Ill take yours;MTL5
+Iron Maiden;1802;FEAR OF THE DARK;I am a man who walks alone;MTL6
+Iron Maiden;1803;RUN TO THE HILLS;White man came across the sea;MTL7
+Iron Maiden;1804;ACES HIGH;There goes the siren that warns of the air raid;MTL8
+AC DC;1901;BACK IN BLACK;Back in black I hit the sack;AUS1
+AC DC;1902;HIGHWAY TO HELL;Living easy living free;AUS2
+AC DC;1903;THUNDERSTRUCK;Thunder ah ah ah thunder;AUS3
+System of a Down;2001;CHOP SUEY;Wake up grab a brush and put a little make up;NU1
+System of a Down;2002;TOXICITY;Eating seeds as a pastime activity;NU2
+System of a Down;2003;BYOB;Why do they always send the poor;NU3
+Titans;2101;EPITAFIO;Devia ter amado mais ter chorado mais;BR10
+Titans;2102;MARVIN;Meu pai nao tinha educacao;BR10B
+Paralamas do Sucesso;2201;ALAGADOS;No Rio de Janeiro a cidade maravilhosa;BR11
+Paralamas do Sucesso;2202;O CALIBRE;Eu vivo sem saber ate quando ainda estou vivo;BR11B
+Sepultura;2301;ROOTS BLOODY ROOTS;Roots bloody roots;MTLBR
+Sepultura;2302;REFUSE RESIST;Chaos is under control;MTLBR2
+Guns N Roses;2401;SWEET CHILD O MINE;Shes got a smile that it seems to me;HR1
+Guns N Roses;2402;WELCOME TO THE JUNGLE;Welcome to the jungle we got fun and games;HR2
+Guns N Roses;2403;NOVEMBER RAIN;When I look into your eyes;HR3
+Aerosmith;2501;DREAM ON;Every time that I look in the mirror;HR4
+Aerosmith;2502;CRAZY;I go crazy crazy baby I go crazy;HR5
+Bon Jovi;2601;LIVIN ON A PRAYER;Tommy used to work on the docks;HR6
+Bon Jovi;2602;ITS MY LIFE;This aint a song for the broken hearted;HR7
+The Beatles;2701;HEY JUDE;Hey Jude dont make it bad;CL1
+The Beatles;2702;LET IT BE;When I find myself in times of trouble;CL2
+The Beatles;2703;YESTERDAY;Yesterday all my troubles seemed so far away;CL3
+The Beatles;2704;COME TOGETHER;Here come old flat top;CL4
+Led Zeppelin;2801;STAIRWAY TO HEAVEN;Theres a lady whos sure all that glitters is gold;CL5
+Led Zeppelin;2802;IMMIGRANT SONG;Ah ah aaaah ah;CL6
+Deep Purple;2901;SMOKE ON THE WATER;We all came out to Montreux;CL7
+The Rolling Stones;3001;PAINT IT BLACK;I see a red door and I want it painted black;CL8
+The Rolling Stones;3002;SATISFACTION;I cant get no satisfaction;CL9
+Pearl Jam;3101;ALIVE;Son she said have I got a little story for you;GRG4
+Pearl Jam;3102;JEREMY;At home drawing pictures of mountain tops;GRG5
+Pearl Jam;3103;BLACK;Sheets of empty canvas untouched sheets of clay;GRG6
+Soundgarden;3201;BLACK HOLE SUN;In my eyes indisposed;GRG7
+Alice in Chains;3301;MAN IN THE BOX;Im the man in the box;GRG8
+Offspring;3401;THE KIDS ARENT ALRIGHT;When we were young the future was so bright;PNK7
+Offspring;3402;SELF ESTEEM;I wrote her off for the tenth time today;PNK8
+Bad Religion;3501;AMERICAN JESUS;Weve got the american Jesus;PNK9
+Sex Pistols;3601;ANARCHY IN THE UK;I am an antichrist;PNK10
+The Clash;3701;SHOULD I STAY OR SHOULD I GO;Darling you got to let me know;PNK11
+Charlie Brown Jr;3801;ZOIO DE LULA;Tirou a roupa entrou no mar;BR12
+Charlie Brown Jr;3802;CEU AZUL;Tao natural quanto a luz do dia;BR13
+Charlie Brown Jr;3803;PROIBIDA PRA MIM;Ela achou meu cabelo engracado;BR14
+CPM 22;3901;UM MINUTO PARA O FIM DO MUNDO;Me sinto so;BR15
+CPM 22;3902;DIAS ATRAS;Nunca mais espero te encontrar;BR16
+Skank;4001;VOU DEIXAR;Vou deixar a vida me levar;BR17
+Skank;4002;GAROTA NACIONAL;Aqui nesse mundinho fechado;BR18
+Capital Inicial;4101;PRIMEIROS ERROS;O meu caminho e cada manha;BR19
+Capital Inicial;4102;A SUA MANEIRA;Ela dormiu no calor dos meus bracos;BR20
+Pitty;4201;MASCARA;Eu sou de ninguem eu sou de todo mundo;BR21
+Pitty;4202;ADMIRAVEL CHIP NOVO;Pane no sistema alguem me desconfigurou;BR22
+Mamonas Assassinas;4301;PELADOS EM SANTOS;Mina seus cabelo e da hora;BR23
+Mamonas Assassinas;4302;VIRA VIRA;Fui convidado pra uma tal de suruba;BR24
+Slipknot;4401;DUALITY;I push my fingers into my eyes;NU4
+Slipknot;4402;PSYCHOSOCIAL;I did my time and I want out;NU5
+Linkin Park;4501;NUMB;Im tired of being what you want me to be;NU6
+Linkin Park;4502;IN THE END;It starts with one thing;NU7
+Evanescence;4601;BRING ME TO LIFE;How can you see into my eyes like open doors;GOTH1
+The Cure;4701;BOYS DONT CRY;I would say Im sorry;GOTH2
+The Smiths;4801;THIS CHARMING MAN;Punctured bicycle on a hillside desolate;IND1
+Joy Division;4901;LOVE WILL TEAR US APART;When routine bites hard;IND2
