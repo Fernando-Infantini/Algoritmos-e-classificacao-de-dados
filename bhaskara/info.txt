@@ -1,0 +1,4 @@
+Um programa com implementação de GUI Java com a finalidade de resolver equações quadráticas.
+
+Para compilar:
+make
