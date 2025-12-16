@@ -104,6 +104,7 @@ O projeto foi desenvolvido com foco em estruturas de dados e árvoreB.
 O arquivo de músicas deve seguir o seguinte formato:
 
 numero de musicas\lixo
+
 artista;codigo;titulo;letra;lixo
 
 ---
