@@ -67,27 +67,22 @@ Implementação dos algorítmos de ordenação vistos durante a disciplina
 
 ---
 
-# 🎵 Spotyfom - Sistema de Gerenciamento de Músicas em Java
+# 🎵 Spotyfom 2.0 - Sistema de Gerenciamento de Músicas em Java
 
 ## 📌 Descrição
 O **Spotyfom** é um sistema em Java que simula um tocador de músicas.  
-Ele permite cadastrar músicas, criar playlists, buscar conteúdos e gerar relatórios.
+Ele permite cadastrar músicas e buscar conteúdos.
 Foi feito com base no código original em C disponível em: https://github.com/Fernando-Infantini/Spotyfom
 
-O projeto foi desenvolvido com foco em estruturas de dados e programação orientada a objetos.
+O projeto foi desenvolvido com foco em estruturas de dados e árvoreB.
 
 ---
 
 ## ⚙ Funcionalidades
 ✅ Leitura de músicas a partir de arquivo  
-✅ Criação de playlist aleatória  
-✅ Criação de playlist personalizada  
-✅ Execução de músicas  
-✅ Contador de execuções  
-✅ Busca por título, artista e código  
-✅ Relatório geral  
-✅ Backup e restauração de dados  
+✅ Busca por título, artista e código    
 ✅ Sistema sem travamentos por entrada inválida  
+✅ Vizualização do sistema por meio de árvores B
 
 ---
 
@@ -95,9 +90,10 @@ O projeto foi desenvolvido com foco em estruturas de dados e programação orien
 
 | Arquivo | Função |
 |----------|--------|
-| `Main.java` | Menu principal |
 | `Spotyfom.java` | Lógica do sistema |
 | `Musica.java` | Modelo da música |
+|`NoArvoreB.java` | Estrutura do nó da arvore |
+|`ArvoreB.java` | Estrutura da raiz da arvore |
 | `info.txt` | Documentação técnica |
 | `*.txt` | Arquivos com musicas para entrada |
 
@@ -107,7 +103,8 @@ O projeto foi desenvolvido com foco em estruturas de dados e programação orien
 
 O arquivo de músicas deve seguir o seguinte formato:
 
-artista;codigo;titulo;letra
+numero de musicas\lixo
+artista;codigo;titulo;letra;lixo
 
 ---
 
