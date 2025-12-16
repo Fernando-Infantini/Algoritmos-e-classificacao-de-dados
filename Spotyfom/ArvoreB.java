@@ -17,15 +17,38 @@ public class ArvoreB<K extends Comparable<K>, V> {
 
     private List<V> buscar(NoArvoreB<K, V> x, K k) {
         if (x == null) return null;
-        int i = 0;
-        while (i < x.chaves.size() && k.compareTo(x.chaves.get(i)) > 0) {
-            i++;
-        }
+        
+        int i = buscaBinaria(x, k);
+
+        // Verifica se o índice retornado aponta para a chave igual
         if (i < x.chaves.size() && k.compareTo(x.chaves.get(i)) == 0) {
             return x.valores.get(i);
         }
+        
         if (x.folha) return null;
+        
         return buscar(x.filhos.get(i), k);
+    }
+
+    // Retorna o índice da primeira chave maior ou igual a k
+    private int buscaBinaria(NoArvoreB<K, V> x, K k) {
+        int inicio = 0;
+        int fim = x.chaves.size() - 1;
+        
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+            int comp = k.compareTo(x.chaves.get(meio));
+            
+            if (comp == 0) {
+                return meio; // Encontrou a chave exata
+            } else if (comp > 0) {
+                inicio = meio + 1; // Está na direita
+            } else {
+                fim = meio - 1; // Está na esquerda
+            }
+        }
+
+        return inicio; 
     }
 
     // ================= INSERÇÃO =================
@@ -70,43 +93,42 @@ public class ArvoreB<K extends Comparable<K>, V> {
     }
 
     private void inserirNaoCheio(NoArvoreB<K, V> x, K k, V v) {
-        int i = x.chaves.size() - 1;
 
         if (x.folha) {
-            // Verifica se chave já existe na folha
-            int pos = -1;
-            for(int idx = 0; idx < x.chaves.size(); idx++){
-                if(x.chaves.get(idx).compareTo(k) == 0) {
-                    pos = idx; 
-                    break;
-                }
-            }
-            if (pos != -1) {
-                x.valores.get(pos).add(v); // Adiciona na lista existente
+            // Usa busca binária para ver se já existe
+            int idx = buscaBinaria(x, k);
+            
+            if (idx < x.chaves.size() && x.chaves.get(idx).compareTo(k) == 0) {
+                // Já existe: adiciona na lista
+                x.valores.get(idx).add(v);
             } else {
-                while (i >= 0 && k.compareTo(x.chaves.get(i)) < 0) {
-                    i--;
-                }
-                x.chaves.add(i + 1, k);
+                // Não existe: Insere na posição correta (idx é o local de inserção)
+                x.chaves.add(idx, k);
                 List<V> lista = new ArrayList<>();
                 lista.add(v);
-                x.valores.add(i + 1, lista);
+                x.valores.add(idx, lista);
             }
         } else {
-            while (i >= 0 && k.compareTo(x.chaves.get(i)) < 0) {
-                i--;
+            // Nó interno
+            int idx = buscaBinaria(x, k);
+            
+            // Se achou a chave no nó interno, adiciona o valor lá mesmo
+            if (idx < x.chaves.size() && x.chaves.get(idx).compareTo(k) == 0) {
+                x.valores.get(idx).add(v);
+                return;
             }
-            i++;
-            if (x.filhos.get(i).chaves.size() == 2 * t - 1) {
-                splitChild(x, i, x.filhos.get(i));
-                if (k.compareTo(x.chaves.get(i)) > 0) {
-                    i++;
-                } else if(k.compareTo(x.chaves.get(i)) == 0){
-                    x.valores.get(i).add(v);
-                    return;
+            
+            // Verifica se filho está cheio e faz split...
+            if (x.filhos.get(idx).chaves.size() == 2 * t - 1) {
+                splitChild(x, idx, x.filhos.get(idx));
+                if (k.compareTo(x.chaves.get(idx)) > 0) {
+                    idx++;
+                } else if (k.compareTo(x.chaves.get(idx)) == 0) {
+                     x.valores.get(idx).add(v);
+                     return;
                 }
             }
-            inserirNaoCheio(x.filhos.get(i), k, v);
+            inserirNaoCheio(x.filhos.get(idx), k, v);
         }
     }
 
@@ -124,7 +146,7 @@ public class ArvoreB<K extends Comparable<K>, V> {
     }
 
     private boolean remover(NoArvoreB<K, V> x, K k, V valorParaRemover) {
-        int idx = encontrarChave(x, k);
+        int idx = buscaBinaria(x, k);
 
         if (idx < x.chaves.size() && x.chaves.get(idx).compareTo(k) == 0) {
             List<V> lista = x.valores.get(idx);
@@ -155,12 +177,6 @@ public class ArvoreB<K extends Comparable<K>, V> {
         } else {
             return remover(x.filhos.get(idx), k, valorParaRemover);
         }
-    }
-
-    private int encontrarChave(NoArvoreB<K, V> x, K k) {
-        int idx = 0;
-        while (idx < x.chaves.size() && x.chaves.get(idx).compareTo(k) < 0) idx++;
-        return idx;
     }
 
     private void removerDeNaoFolha(NoArvoreB<K, V> x, int idx) {
