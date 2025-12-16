@@ -1,0 +1,5 @@
+Algoritmo criado na disciplina para testar e comparar o desempenho de diferentes métodos de busca em grafos, gerando um relatório.csv com tempos e também o boxplot de cada algoritmo.
+
+Para executar:
+javac *.java
+java TestRunnerAutomatizado graphfiles
