@@ -131,9 +131,9 @@ Este repositório tem como objetivo:
 
 ---
 
-## 👨‍🎓 Autor
+## Autores
 
-**Fernando Infantini**  
+**Fernando Infantini, Enzo Moraes e Ronaldy Gelos**  
 Disciplina: Algoritmos e Classificação de Dados  
 Linguagem: Java  
 Ano: 2025
